@@ -70,7 +70,8 @@ class UserController extends Controller
                     'status' => 'success',
                     'code'   => 200,
                     'MESSAGE' => 'El usuario se ha creado correctamente',
-                    'user' => $user
+                    'user' => $user,
+                    'changes' => $params_array
                 );
             }
         } else {
