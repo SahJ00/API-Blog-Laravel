@@ -26,7 +26,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::find($id)->load('category');
+        $post = Post::find($id)->load('category')->load('user');
 
         if (is_object($post)) {
             $data = [
@@ -50,6 +50,8 @@ class PostController extends Controller
         $json = $request->input('json', null);
         $params = json_decode($json);
         $params_array = json_decode($json, true);
+
+
 
         if (!empty($params_array)) {
             // Conseguir usuario identificado
@@ -253,7 +255,8 @@ class PostController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function getPostsByCategory($id) {
+    public function getPostsByCategory($id)
+    {
         $posts = Post::where('category_id', $id)->get();
 
         return response()->json([
@@ -262,7 +265,8 @@ class PostController extends Controller
         ], 200);
     }
 
-    public function getPostsByUser($id) {
+    public function getPostsByUser($id)
+    {
         $posts = Post::where('user_id', $id)->get();
 
         return response()->json([
